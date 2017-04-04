@@ -26,6 +26,7 @@
     },
     mounted () {
       var loading = false;
+      var catCount = 0;
 
       function encodeQueryData (data) {
         let ret = [];
@@ -35,15 +36,16 @@
         return ret.join('&');
       }
 
-      function getCats (queryString, items, loading) {
+      function getCats (queryString, items) {
+        catCount += 10;
+        loading = true;
         fetch('http://api.giphy.com/v1/gifs/search?' + queryString).then(function (response) {
-          loading = true;
           return response.json();
         }).then(function (json) {
+          loading = false;
           for (var img in json.data) {
             items.push({'src': json.data[img].images.downsized.url});
           }
-          loading = false;
         }).catch(function (err) {
           if (err) {
             console.log(err.stack);
@@ -65,8 +67,8 @@
       var that = this;
       this.$$('.infinite-scroll').on('infinite', function () {
         if (!loading) {
-          var catQuery = queryCats(that.items.length);
-          getCats(catQuery, that.items, loading);
+          var catQuery = queryCats(catCount);
+          getCats(catQuery, that.items);
         }
       });
 
