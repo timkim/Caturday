@@ -6,6 +6,7 @@ import 'babel-polyfill';
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
+import Vuex from 'vuex';
 
 // Import F7
 /* eslint-disable no-unused-vars */
@@ -43,9 +44,21 @@ require('framework7-icons/css/framework7-icons.css');
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue);
 
+// Init using Vuex
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+  }
+});
+
 // Init App
 new Vue({ // eslint-disable-line no-new
   el: '#app',
+  store,
   template: '<app />',
   // Init Framework7 by passing parameters here
   framework7: {

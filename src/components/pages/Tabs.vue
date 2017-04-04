@@ -1,5 +1,5 @@
 <template>
-  <f7-page with-subnavbar>
+  <f7-page infinite-scroll @infinite="onInfiniteScroll" with-subnavbar>
     <f7-navbar title="Home" sliding />
 
     <!-- iOS TabBar has icons, Material TabBar does not -->
@@ -9,7 +9,7 @@
         <f7-link :icon-f7="isiOS ? 'persons' : ''" text="Services" tab-link="#services"></f7-link>
     </f7-toolbar>
 
-    <f7-tabs>
+    <f7-tabs >
       <f7-tab id="cats" active>
         <cats-page />
       </f7-tab>
