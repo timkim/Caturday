@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
     <li class="cat-container" v-for="item in items">
       <Cat v-bind:message=item.src></Cat>
     </li>
@@ -8,7 +8,7 @@
 
 <script>
   import Cat from './Cat';
-
+  console.log(this);
   export default {
     name: 'Cats',
     components: {
@@ -16,64 +16,58 @@
     },
     data: function () {
       return {
+        catCount: 0,
+        busy: false,
         items: []
       };
     },
     methods: {
-      updateItems: function (item) {
-        this.items.push(item);
-      }
-    },
-    mounted () {
-      var loading = false;
-      var catCount = 0;
-
-      function encodeQueryData (data) {
+      encodeQueryData: function (data) {
         let ret = [];
         for (let d in data) {
           ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
         }
         return ret.join('&');
-      }
-
-      function getCats (queryString, items) {
-        catCount += 10;
-        loading = true;
-        fetch('http://api.giphy.com/v1/gifs/search?' + queryString).then(function (response) {
-          return response.json();
-        }).then(function (json) {
-          loading = false;
-          for (var img in json.data) {
-            items.push({'src': json.data[img].images.downsized.url});
-          }
-        }).catch(function (err) {
-          if (err) {
-            console.log(err.stack);
-          }
-        });
-      }
-
-      function queryCats (offset) {
-        return encodeQueryData({
+      },
+      getCats: function (queryString, items) {
+        var that = this;
+        if (!this.busy) {
+          this.catCount += 10;
+          this.busy = true;
+          fetch('http://api.giphy.com/v1/gifs/search?' + queryString).then(function (response) {
+            return response.json();
+          }).then(function (json) {
+            that.busy = false;
+            for (var img in json.data) {
+              that.items.push({'src': json.data[img].images.downsized.url});
+            }
+          }).catch(function (err) {
+            if (err) {
+              console.log(err.stack);
+            }
+          });
+        }
+      },
+      queryCats: function (offset) {
+        return this.encodeQueryData({
           'q': 'cat',
           'limit': 10,
           'offset': offset !== undefined ? offset : 0,
           'rating': 'g',
           'api_key': 'dc6zaTOxFJmzC'
         });
+      },
+      updateItems: function (item) {
+        this.items.push(item);
+      },
+      loadMore: function () {
+        var catQuery = this.queryCats(this.catCount);
+        this.getCats(catQuery, this.items);
       }
-      this.$$ = this.Dom7;
-
-      var that = this;
-      this.$$('.infinite-scroll').on('infinite', function () {
-        if (!loading) {
-          var catQuery = queryCats(catCount);
-          getCats(catQuery, that.items);
-        }
-      });
-
-      var catQuery = queryCats();
-      getCats(catQuery, this.items, loading);
+    },
+    mounted () {
+      var catQuery = this.queryCats();
+      this.getCats(catQuery, this.items);
     }
   };
 </script>

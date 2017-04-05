@@ -18,6 +18,13 @@
       return {
         title: 'Services Page'
       };
+    },
+    mounted () {
+      this.$$ = this.Dom7;
+      var that = this;
+      this.$$('#services').on('tab:show', function () {
+        that.$$('.infinite-scroll-preloader').remove();
+      });
     }
   };
 </script>

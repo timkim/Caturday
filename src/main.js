@@ -7,6 +7,7 @@ import 'babel-polyfill';
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import Vuex from 'vuex';
+import infiniteScroll from 'vue-infinite-scroll';
 
 // Import F7
 /* eslint-disable no-unused-vars */
@@ -46,6 +47,8 @@ Vue.use(Framework7Vue);
 
 // Init using Vuex
 Vue.use(Vuex);
+
+Vue.use(infiniteScroll);
 
 const store = new Vuex.Store({
   state: {

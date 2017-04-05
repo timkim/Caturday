@@ -18,6 +18,13 @@
       return {
         title: 'About Page'
       };
+    },
+    mounted () {
+      this.$$ = this.Dom7;
+      var that = this;
+      this.$$('#about').on('tab:show', function () {
+        that.$$('.infinite-scroll-preloader').remove();
+      });
     }
   };
 </script>
