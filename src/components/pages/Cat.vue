@@ -1,6 +1,6 @@
 <template>
   <f7-block inner>
-    <img v-bind:src=message />
+    <img v-bind:src=message v-on:click.once="like" />
   </f7-block>
 </template>
 
@@ -14,6 +14,12 @@
       };
     },
     methods: {
+      like: function (event) {
+        this.$$ = this.Dom7;
+        if (this.$$('#cats').hasClass('active')) {
+          this.$store.commit('addCat', {'src': event.target.src});
+        }
+      }
     }
   };
 </script>
