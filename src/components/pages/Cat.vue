@@ -1,6 +1,6 @@
 <template>
-  <f7-block inner>
-    <img v-bind:src=message v-on:click.once="like" />
+  <f7-block>
+    <img v-bind:src=message v-on:click.once="like" v-bind:style="catImgStyle" />
   </f7-block>
 </template>
 
@@ -10,6 +10,10 @@
     props: ['message'],
     data: function () {
       return {
+        catImgStyle: {
+          margin: '0 auto',
+          width: '90%'
+        },
         liked: false
       };
     },

@@ -1,6 +1,6 @@
 <template>
   <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-    <li class="cat-container" v-for="item in items">
+    <li class="cat-container" v-for="item in items" v-bind:style="catItemStyle">
       <Cat v-bind:message=item.src></Cat>
     </li>
   </ul>
@@ -16,6 +16,9 @@
     },
     data: function () {
       return {
+        catItemStyle: {
+          listStyle: 'none'
+        },
         catCount: 0,
         busy: false,
         items: []
