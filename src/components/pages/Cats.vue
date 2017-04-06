@@ -8,7 +8,7 @@
 
 <script>
   import Cat from './Cat';
-  console.log(this);
+
   export default {
     name: 'Cats',
     components: {
@@ -31,7 +31,9 @@
       },
       getCats: function (queryString, items) {
         var that = this;
-        if (!this.busy) {
+        this.$$ = this.Dom7;
+
+        if (!this.busy && this.$$('#cats').hasClass('active')) {
           this.catCount += 10;
           this.busy = true;
           fetch('http://api.giphy.com/v1/gifs/search?' + queryString).then(function (response) {

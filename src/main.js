@@ -48,13 +48,22 @@ Vue.use(Framework7Vue);
 // Init using Vuex
 Vue.use(Vuex);
 
+// Init using infinite scroll
 Vue.use(infiniteScroll);
 
 const store = new Vuex.Store({
   state: {
-    count: 0
+    lovedCats: []
+  },
+  getters: {
+    getLovedCats: function (state) {
+      return state;
+    }
   },
   mutations: {
+    addCat (state, cat) {
+      state.lovedCats.push(cat);
+    }
   }
 });
 

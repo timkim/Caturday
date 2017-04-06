@@ -7,6 +7,13 @@
 <script>
   export default {
     name: 'Cat',
-    props: ['message']
+    props: ['message'],
+    data: function () {
+      return {
+        liked: false
+      };
+    },
+    methods: {
+    }
   };
 </script>

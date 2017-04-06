@@ -5,19 +5,19 @@
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar :labels="isiOS">
         <f7-link :icon-f7="isiOS ? 'cats' : ''" text="Cats" tab-link="#cats" active></f7-link>
-        <f7-link :icon-f7="isiOS ? 'info' : ''" text="About" tab-link="#about"></f7-link>
-        <f7-link :icon-f7="isiOS ? 'persons' : ''" text="Services" tab-link="#services"></f7-link>
+        <f7-link :icon-f7="isiOS ? 'info' : ''" text="Loved" tab-link="#loved"></f7-link>
+        <f7-link :icon-f7="isiOS ? 'persons' : ''" text="About" tab-link="#about"></f7-link>
     </f7-toolbar>
 
     <f7-tabs >
       <f7-tab id="cats" active>
         <cats-page />
       </f7-tab>
+      <f7-tab id="loved">
+        <loved-page />
+      </f7-tab>
       <f7-tab id="about">
         <about-page />
-      </f7-tab>
-      <f7-tab id="services">
-        <services-page />
       </f7-tab>
     </f7-tabs>
 
@@ -26,15 +26,15 @@
 
 <script>
   import Cats from './Cats';
+  import Loved from './Loved';
   import About from './About';
-  import Services from './Services';
 
   export default {
     name: 'Tabs',
     components: {
       'cats-page': Cats,
-      'about-page': About,
-      'services-page': Services
+      'loved-page': Loved,
+      'about-page': About
     },
     computed: {
       isiOS () {
