@@ -58,11 +58,24 @@ const store = new Vuex.Store({
   getters: {
     getLovedCats: function (state) {
       return state;
+    },
+    findACat: (state, getters) => (catUrl) => {
+      return state.lovedCats.find(cat => cat.src === catUrl);
     }
   },
   mutations: {
     addCat (state, cat) {
       state.lovedCats.push(cat);
+    },
+    removeCat (state, cat) {
+      function isItTheCat (catElement) {
+        return catElement.src === cat.src;
+      }
+
+      var index = state.lovedCats.findIndex(isItTheCat);
+      if (index > -1) {
+        state.lovedCats.splice(index, 1);
+      }
     }
   }
 });

@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul v-bind:style="catListStyle">
     <li class="cat-container" v-for="item in items" v-bind:style="catItemStyle">
       <Cat v-bind:message=item.src></Cat>
     </li>
@@ -19,6 +19,9 @@
         title: 'Loved',
         catItemStyle: {
           listStyle: 'none'
+        },
+        catListStyle: {
+          'padding-left': 0
         },
         items: this.$store.getters.getLovedCats.lovedCats
       };

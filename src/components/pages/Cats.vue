@@ -1,5 +1,5 @@
 <template>
-  <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+  <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10" v-bind:style="catListStyle">
     <li class="cat-container" v-for="item in items" v-bind:style="catItemStyle">
       <Cat v-bind:message=item.src></Cat>
     </li>
@@ -18,6 +18,9 @@
       return {
         catItemStyle: {
           listStyle: 'none'
+        },
+        catListStyle: {
+          'padding-left': 0
         },
         catCount: 0,
         busy: false,

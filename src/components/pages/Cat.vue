@@ -1,6 +1,12 @@
 <template>
   <f7-block>
-    <img v-bind:src=message v-on:click.once="like" v-bind:style="catImgStyle" />
+    <img v-bind:src=message v-bind:style="catImgStyle" />
+    <br />
+    <f7-buttons>
+      <f7-button v-if="!isLiked" icon-f7="heart" v-on:click="like(message)"></f7-button>
+      <f7-button v-else icon-f7="heart_fill" v-on:click="unlike(message)"></f7-button>
+      <f7-button icon-f7="share"></f7-button>
+    </f7-buttons>
   </f7-block>
 </template>
 
@@ -12,16 +18,24 @@
       return {
         catImgStyle: {
           margin: '0 auto',
-          width: '90%'
-        },
-        liked: false
+          width: '100%'
+        }
       };
     },
+    computed: {
+      isLiked () {
+        return this.$store.getters.findACat(this._props.message);
+      }
+    },
     methods: {
-      like: function (event) {
-        this.$$ = this.Dom7;
-        if (this.$$('#cats').hasClass('active')) {
-          this.$store.commit('addCat', {'src': event.target.src});
+      like: function (catUrl) {
+        if (!this.isLiked) {
+          this.$store.commit('addCat', {'src': catUrl});
+        }
+      },
+      unlike: function (catUrl) {
+        if (this.isLiked) {
+          this.$store.commit('removeCat', {'src': catUrl});
         }
       }
     }
