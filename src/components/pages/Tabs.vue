@@ -1,12 +1,12 @@
 <template>
   <f7-page with-subnavbar>
-    <f7-navbar title="Home" sliding />
+    <f7-navbar title="Caturday" sliding />
 
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar :labels="isiOS">
-        <f7-link :icon-f7="isiOS ? 'cats' : ''" text="Cats" tab-link="#cats" active></f7-link>
-        <f7-link :icon-f7="isiOS ? 'info' : ''" text="Loved" tab-link="#loved"></f7-link>
-        <f7-link :icon-f7="isiOS ? 'persons' : ''" text="About" tab-link="#about"></f7-link>
+        <f7-link :icon-f7="isiOS ? 'images' : ''" text="Cats" tab-link="#cats" active></f7-link>
+        <f7-link :icon-f7="isiOS ? 'heart' : ''" text="Loved" tab-link="#loved"></f7-link>
+        <f7-link :icon-f7="isiOS ? 'info' : ''" text="About" tab-link="#about"></f7-link>
     </f7-toolbar>
 
     <f7-tabs >
