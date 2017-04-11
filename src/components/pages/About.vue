@@ -9,7 +9,7 @@
       Coded and written by Tim Kim.
 
       <br />
-      @timkim on <f7-link href="http://github.com/timkim" external>github</f7-link>, <f7-link href="http://twitter.com/timkim" external>twitter</f7-link> and elsewhere.
+      @timkim on <f7-link href="https://github.com/timkim" external>github</f7-link>, <f7-link href="http://twitter.com/timkim" external>twitter</f7-link> and elsewhere.
 
     </f7-block>
   </div>
